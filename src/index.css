@@ -14,4 +14,12 @@
   --neutral-light-gray: 223, 19%, 93%;
   --neutral-very-light-gray: 228, 33%, 97%;
   --neutral-white: 0, 0%, 100%;
+  --very-light-gray: 228, 33%, 97%;
+}
+
+.up-vote-button {
+  @apply   focus:ring-0;
+}
+.down-vote-button {
+  @apply focus:ring-0;
 }

@@ -33,6 +33,9 @@ module.exports = {
       fontFamily: {
         mono: ["Rubik", ...defaultTheme.fontFamily.mono],
       },
+      width: {
+        '128': '45rem',
+      }
     },
   },
   plugins: [require("@tailwindcss/forms")],
