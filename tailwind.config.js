@@ -1,3 +1,4 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
 // opacity value will be 1 if no opacity defined
 function opacityCalculation(variable) {
   return ({ opacityValue }) => `hsla(var(${variable}), ${opacityValue || 1} )`;
@@ -6,6 +7,12 @@ function opacityCalculation(variable) {
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+      },
+    },
     extend: {
       colors: {
         transparent: "transparent",
@@ -23,7 +30,10 @@ module.exports = {
           white: opacityCalculation("--neutral-white"),
         },
       },
+      fontFamily: {
+        mono: ["Rubik", ...defaultTheme.fontFamily.mono],
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
