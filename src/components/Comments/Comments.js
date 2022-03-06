@@ -9,6 +9,8 @@ const Comments = ({ data, setData }) => {
           <Fragment key={comment.id}>
             <CommentsLayout
               comment={comment}
+              data={data}
+              setData={setData}
               currentUser={data.currentUser}
               images={comment.user.image.webp}
             />

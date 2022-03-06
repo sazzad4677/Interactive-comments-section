@@ -6,11 +6,12 @@ import fakeData from "../data/data.json";
 
 const MainPage = () => {
   const [data, setData] = useState(fakeData);
+
   return (
-    <section className="relative flex min-h-screen flex-wrap place-content-center gap-6 font-mono antialiased md:w-128">
-      <Comments data={data} setData={setData} />
+    <section className="relative flex  flex-wrap place-content-center gap-6 font-mono antialiased md:w-128">
+      <Comments data={data} setData={setData}/>
       <Replies data={data} setData={setData} />
-      <NewComment />
+      <NewComment data={data} setData={setData} />
     </section>
   );
 };

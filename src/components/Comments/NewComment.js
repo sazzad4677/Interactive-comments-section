@@ -1,10 +1,10 @@
 import React from 'react';
 import NewCommentLayout from '../../layout/NewCommentLayout';
 
-const NewComment = () => {
+const NewComment = ({data, setData}) => {
     return (
-        <div>
-            <NewCommentLayout/>
+        <div className="w-full">
+            <NewCommentLayout data={data} setData={setData}/>
         </div>
     );
 };

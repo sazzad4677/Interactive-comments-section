@@ -4,7 +4,7 @@ import plus from "../images/icon-plus.svg";
 import reply from "../images/icon-reply.svg";
 
 const CommentsLayout = ({ comment, images }) => {
-  const { content, createdAt, score, user } = comment;
+  const {id, content, createdAt, score, user } = comment;
   return (
     <>
       <div className="mx-auto flex w-full flex-row flex-nowrap items-start justify-between gap-5 rounded-lg bg-neutral-white p-5">

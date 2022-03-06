@@ -3,7 +3,7 @@ import MainPage from "./pages/MainPage";
 
 function App() {
   return (
-    <div className="bg-neutral-very-light-gray grid place-content-center">
+    <div className="app">
       <MainPage />
     </div>
   );

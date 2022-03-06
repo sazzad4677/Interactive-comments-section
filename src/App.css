@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgb(--scheme-based-bg-color);
 }
 
 html {
@@ -12,18 +11,17 @@ html {
 body {
   width: 100%;
   height: 100vh;
+  background-color: hsl(var(--neutral-very-light-gray));
 }
 
-/* .colors{
-  blue: hsl(238, 40%, 52%);
- red: hsl(358, 79%, 66%);
-  blue: hsl(239, 57%, 85%);
-red: hsl(357, 100%, 86%);
-
-
-blue: hsl(212, 24%, 26%);
-Blue: hsl(211, 10%, 45%);
- gray: hsl(223, 19%, 93%);
-gray: hsl(228, 33%, 97%);
-White: hsl(0, 0%, 100%);
-} */
+.app {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45rem;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-start;
+  padding: 2rem 1rem;
+}
