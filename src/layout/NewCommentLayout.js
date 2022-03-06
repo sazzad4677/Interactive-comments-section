@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 
 const NewCommentLayout = ({ data, setData }) => {
+  // initial height for the text field
+  const textAreaHeight = 32;
+  // Text area reference
+  const textareaRef = useRef(null);
+  // get the value of the text field
+  const [textAreaValue, setTextAreaValue] = React.useState("");
+  // Set the value on Change
+  const onChange = (event) => setTextAreaValue(event.target.value);
+  // Dynamically increase the height of the text
+  useLayoutEffect(() => {
+    textareaRef.current.style.height = "inherit";
+    textareaRef.current.style.height = `${Math.max(
+      textareaRef.current.scrollHeight,
+      textAreaHeight
+    )}px`;
+  }, [textAreaValue]);
+
   return (
     <div className="rounded-md bg-neutral-white py-6 px-4">
       <form className="flex flex-wrap gap-5">
@@ -13,13 +30,22 @@ const NewCommentLayout = ({ data, setData }) => {
         </div>
         <div className="flex flex-grow flex-wrap gap-4">
           <textarea
-            className="border-1 focus:border-1 w-full resize-y rounded-md border-neutral-very-light-gray pt-3 pr-0 pb-9 pl-3 font-mono text-sm text-neutral-dark-blue focus:border-primary-moderate-blue focus:ring-0"
+            onChange={onChange}
+            ref={textareaRef}
+            style={{
+              minHeight: textAreaHeight,
+              resize: "none",
+            }}
+            className="border-1 focus:border-1 text-md w-full resize-none overflow-hidden rounded-md border-neutral-very-light-gray px-5 pb-8 font-mono text-neutral-dark-blue focus:border-neutral-grayish-blue focus:ring-0"
             placeholder="Add a comment..."
           />
         </div>
         <div className="ml-auto">
-          <button type="submit" className="relative w-28 h-fit px-5 py-2.5 ml-4 font-medium border rounded-lg text-white bg-primary-moderate-blue text-md font-mono text-base">
-            SEND
+          <button
+            type="submit"
+            className="text-md relative h-fit w-28 rounded-lg border bg-primary-moderate-blue px-4 py-3 font-mono text-base font-medium text-neutral-white hover:bg-primary-grayish-blue"
+          >
+            REPLY
           </button>
         </div>
       </form>

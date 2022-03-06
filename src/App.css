@@ -25,3 +25,18 @@ body {
   justify-content: flex-start;
   padding: 2rem 1rem;
 }
+
+.scoreUpDownButton{
+  fill: #C5C6EF;
+}
+
+.scoreUpDownButton:hover {
+  fill: hsl(var(--primary-moderate-blue));
+}
+
+.reply{
+  fill: #5357B6;
+}
+.reply:hover {
+  fill: hsl(var(--primary-light-grayish-blue));
+}

@@ -18,6 +18,7 @@ module.exports = {
         transparent: "transparent",
         current: "currentColor",
         primary: {
+          "grayish-blue": opacityCalculation("--primary-light-grayish-blue"),
           "moderate-blue": opacityCalculation("--primary-moderate-blue"),
           "soft-red": opacityCalculation("--primary-soft-red"),
           "pale-red": opacityCalculation("--primary-pale-red"),
