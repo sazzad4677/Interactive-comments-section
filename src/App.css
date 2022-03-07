@@ -34,9 +34,21 @@ body {
   fill: hsl(var(--primary-moderate-blue));
 }
 
-.reply{
+.replyIcon{
   fill: #5357B6;
 }
-.reply:hover {
+.replyIcon:hover {
   fill: hsl(var(--primary-light-grayish-blue));
+}
+.editIcon{
+  fill: #5357B6;
+}
+.editIcon:hover {
+  fill: hsl(var(--primary-light-grayish-blue));
+}
+.deleteIcon{
+  fill: #ED6368;
+}
+.deleteIcon:hover {
+  fill: hsl(var(--primary-pale-red));
 }
