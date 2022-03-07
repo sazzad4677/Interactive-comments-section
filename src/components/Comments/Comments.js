@@ -6,7 +6,7 @@ const Comments = ({ data, setData, updateVote }) => {
     <>
       {data?.comments.map((comment, key) => (
         <Fragment key={comment.id}>
-          <div className="flex flex-col justify-center gap-6">
+          <div className="flex flex-col justify-center gap-6 w-full">
             <CommentsLayout
               comment={comment}
               data={data}
@@ -17,7 +17,7 @@ const Comments = ({ data, setData, updateVote }) => {
             />
           </div>
           {comment.replies?.length > 0 && (
-            <div className="ml-10 flex flex-wrap gap-6 border-l-2 pl-10">
+            <div className="ml-10 flex flex-wrap gap-6 border-l-2 pl-10 w-full">
               {comment.replies.map((reply) => (
                 <Fragment key={reply.id}>
                   <CommentsLayout

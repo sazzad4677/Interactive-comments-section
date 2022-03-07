@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import NewCommentLayout from "../../layout/NewCommentLayout";
 
-const NewComment = ({
-  data,
-  setData,
-  reply,
-  setReply,
-  replyUser,
-  newComment,
-}) => {
-  const [textAreaValue, setTextAreaValue] = useState("");
+const Reply = ({ replyUser, data, setData, reply, setReply }) => {
+  const [textAreaValue, setTextAreaValue] = useState(
+    `@${replyUser?.user?.username} `
+  );
   const onChange = (event) => setTextAreaValue(event.target.value);
   const onSubmit = (e) => {
     e.preventDefault();
-    newComment(textAreaValue);
+    setReply((prev) => !prev);
   };
-
   return (
     <div className="w-full">
       <NewCommentLayout
@@ -24,7 +18,6 @@ const NewComment = ({
         reply={reply}
         setReply={setReply}
         replyUser={replyUser}
-        newComment={newComment}
         onChange={onChange}
         onSubmit={onSubmit}
         textAreaValue={textAreaValue}
@@ -34,4 +27,4 @@ const NewComment = ({
   );
 };
 
-export default NewComment;
+export default Reply;

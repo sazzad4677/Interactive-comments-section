@@ -1,6 +1,5 @@
-import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-// import { ExclamationIcon } from "@heroicons/react/outline";
+import { Fragment, useRef } from "react";
 
 const Delete = ({ open, setOpen }) => {
   const cancelButtonRef = useRef(null);

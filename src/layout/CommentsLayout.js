@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-
+import Reply from "../components/Comments/Reply";
+import { ReactComponent as DeleteIcon } from "../images/icon-delete.svg";
+import { ReactComponent as EditIcon } from "../images/icon-edit.svg";
 import { ReactComponent as MinusIcon } from "../images/icon-minus.svg";
 import { ReactComponent as PlusIcon } from "../images/icon-plus.svg";
 import { ReactComponent as ReplyIcon } from "../images/icon-reply.svg";
-import { ReactComponent as DeleteIcon } from "../images/icon-delete.svg";
-import { ReactComponent as EditIcon } from "../images/icon-edit.svg";
-import NewComment from "../components/Comments/NewComment";
 import DeleteModal from "./DeleteModal";
 
 const CommentsLayout = ({
@@ -19,6 +18,7 @@ const CommentsLayout = ({
   const { id, content, createdAt, score, user, replyingTo } = comment;
   const [reply, setReply] = useState(false);
   const [open, setOpen] = useState(false);
+  const [replyUser, setReplyUser] = useState("");
   return (
     <>
       <div className="mx-auto flex w-full flex-row flex-nowrap items-start justify-between gap-5 rounded-lg bg-neutral-white p-5">
@@ -66,7 +66,10 @@ const CommentsLayout = ({
             {/* Reply Button */}
             {currentUser.username !== user.username ? (
               <button
-                onClick={() => setReply((prev) => !prev)}
+                onClick={() => {
+                  setReply((prev) => !prev);
+                  setReplyUser(comment);
+                }}
                 className="replyIcon gap- flex items-center font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
               >
                 <ReplyIcon className="font-medium" /> &nbsp; Reply
@@ -101,19 +104,15 @@ const CommentsLayout = ({
         </div>
       </div>
       {reply && (
-        <NewComment
-          data={data}
-          setData={setData}
-          reply={reply}
-          setReply={setReply}
-        />
+          <Reply
+            data={data}
+            setData={setData}
+            reply={reply}
+            setReply={setReply}
+            replyUser={replyUser}
+          />
       )}
-      {
-        <DeleteModal
-          open={open}
-          setOpen={setOpen}
-        />
-      }
+      <DeleteModal open={open} setOpen={setOpen} />
     </>
   );
 };
