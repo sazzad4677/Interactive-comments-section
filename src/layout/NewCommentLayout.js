@@ -7,7 +7,7 @@ const NewCommentLayout = ({ data, setData, reply, setReply }) => {
   const textareaRef = useRef(null);
   // get the value of the text field
   const [textAreaValue, setTextAreaValue] = useState("");
-  const [value, setValue] = useState(`@`)
+  const [value, setValue] = useState(`@`);
   // Set the value on Change
   const onChange = (event) => setTextAreaValue(event.target.value);
   // Dynamically increase the height of the text
