@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Reply from "../components/Comments/Reply";
+import useTextAreaWidth from "../hooks/useTextAreaWidth";
 import { ReactComponent as DeleteIcon } from "../images/icon-delete.svg";
 import { ReactComponent as EditIcon } from "../images/icon-edit.svg";
 import { ReactComponent as MinusIcon } from "../images/icon-minus.svg";
@@ -22,6 +23,8 @@ const CommentsLayout = ({
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const [replyUser, setReplyUser] = useState("");
+  const [textAreaHeight, textareaRef, textAreaValue, setValue] =
+    useTextAreaWidth();
   return (
     <>
       <div className="mx-auto flex w-full flex-row flex-nowrap items-start justify-between gap-5 rounded-lg bg-neutral-white p-5">
@@ -102,13 +105,13 @@ const CommentsLayout = ({
           {edit && (
             <div className="flex flex-grow flex-wrap gap-4">
               <textarea
-                // onChange={onChange}
-                // ref={textareaRef}
+                onChange={(e) => setValue(e)}
+                ref={textareaRef}
                 style={{
-                  // minHeight: textAreaHeight,
+                  minHeight: textAreaHeight,
                   resize: "none",
                 }}
-                // value={textAreaValue}
+                value={textAreaValue}
                 placeholder="Add a comment..."
               />
             </div>

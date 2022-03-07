@@ -1,19 +1,8 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React from "react";
+import useTextAreaWidth from "../hooks/useTextAreaWidth";
 
-const NewCommentLayout = ({ data, textAreaValue, onChange, onSubmit }) => {
-  // initial height for the text field
-  const textAreaHeight = 32;
-  // Text area reference
-  const textareaRef = useRef(null);
-  // Dynamically increase the height of the text
-  useLayoutEffect(() => {
-    textareaRef.current.style.height = "inherit";
-    textareaRef.current.style.height = `${Math.max(
-      textareaRef.current.scrollHeight,
-      textAreaHeight
-    )}px`;
-  }, [textAreaValue]);
-
+const NewCommentLayout = ({ data, onSubmit }) => {
+  const [textAreaHeight, textareaRef, textAreaValue, setValue] = useTextAreaWidth()
   return (
     <div className="rounded-md bg-neutral-white py-6 px-4">
       <form onSubmit={onSubmit} className="flex flex-wrap gap-5">
@@ -26,7 +15,7 @@ const NewCommentLayout = ({ data, textAreaValue, onChange, onSubmit }) => {
         </div>
         <div className="flex flex-grow flex-wrap gap-4">
           <textarea
-            onChange={onChange}
+            onChange={(e) => setValue(e)}
             ref={textareaRef}
             style={{
               minHeight: textAreaHeight,
