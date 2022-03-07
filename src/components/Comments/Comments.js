@@ -21,6 +21,8 @@ const Comments = ({ data, setData, updateVote }) => {
               {comment.replies.map((reply) => (
                 <Fragment key={reply.id}>
                   <CommentsLayout
+                    data={data}
+                    setData={setData}
                     comment={reply}
                     currentUser={data.currentUser}
                     images={reply.user.image.webp}

@@ -1,12 +1,13 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 
-const NewCommentLayout = ({ data, setData }) => {
+const NewCommentLayout = ({ data, setData, reply, setReply }) => {
   // initial height for the text field
   const textAreaHeight = 32;
   // Text area reference
   const textareaRef = useRef(null);
   // get the value of the text field
-  const [textAreaValue, setTextAreaValue] = React.useState("");
+  const [textAreaValue, setTextAreaValue] = useState("");
+  const [value, setValue] = useState(`@`)
   // Set the value on Change
   const onChange = (event) => setTextAreaValue(event.target.value);
   // Dynamically increase the height of the text
@@ -42,6 +43,7 @@ const NewCommentLayout = ({ data, setData }) => {
         </div>
         <div className="ml-auto">
           <button
+            onClick={() => setReply((prev) => !prev)}
             type="submit"
             className="text-md relative h-fit w-28 rounded-lg border bg-primary-moderate-blue px-4 py-3 font-mono text-base font-medium text-neutral-white hover:bg-primary-grayish-blue"
           >

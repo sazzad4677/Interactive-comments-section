@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { ReactComponent as MinusIcon } from "../images/icon-minus.svg";
 import { ReactComponent as PlusIcon } from "../images/icon-plus.svg";
 import { ReactComponent as ReplyIcon } from "../images/icon-reply.svg";
 import { ReactComponent as DeleteIcon } from "../images/icon-delete.svg";
 import { ReactComponent as EditIcon } from "../images/icon-edit.svg";
+import NewComment from "../components/Comments/NewComment";
 
-const CommentsLayout = ({ comment, images, updateVote, currentUser }) => {
+const CommentsLayout = ({
+  comment,
+  images,
+  updateVote,
+  currentUser,
+  data,
+  setData,
+}) => {
   const { id, content, createdAt, score, user, replyingTo } = comment;
+  const [reply, setReply] = useState(false);
   return (
     <>
       <div className="mx-auto flex w-full flex-row flex-nowrap items-start justify-between gap-5 rounded-lg bg-neutral-white p-5">
@@ -54,11 +63,14 @@ const CommentsLayout = ({ comment, images, updateVote, currentUser }) => {
             </div>
             {/* Reply Button */}
             {currentUser.username !== user.username && (
-              <div className="replyIcon flex cursor-pointer items-center gap-2 text-primary-moderate-blue hover:text-primary-grayish-blue">
-                <ReplyIcon className="font-medium" />
-                Reply
-              </div>
+              <button
+                onClick={() => setReply(prev => !prev)}
+                className="replyIcon gap- flex items-center font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
+              >
+                <ReplyIcon className="font-medium" /> &nbsp; Reply
+              </button>
             )}
+            {/* Delete and Edit button */}
             {currentUser.username === user.username && (
               <div className="flex items-center gap-6 ">
                 <div className="deleteIcon flex cursor-pointer items-center gap-2 text-primary-soft-red hover:text-primary-pale-red">
@@ -74,10 +86,17 @@ const CommentsLayout = ({ comment, images, updateVote, currentUser }) => {
           </div>
           {/* Comments */}
           <div className="w-full text-base font-normal leading-6 text-neutral-grayish-blue">
-            {replyingTo && <span className="text-primary-moderate-blue font-bold">@{replyingTo}</span>} {content}
+            {replyingTo && (
+              <span className="font-bold text-primary-moderate-blue">
+                @{replyingTo}
+              </span>
+            )}
+            &nbsp;
+            {content}
           </div>
         </div>
       </div>
+      {reply && <NewComment data={data} setData={setData} reply={reply} setReply={setReply} />}
     </>
   );
 };
