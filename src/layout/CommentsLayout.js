@@ -1,11 +1,13 @@
 import React from "react";
+
 import { ReactComponent as MinusIcon } from "../images/icon-minus.svg";
 import { ReactComponent as PlusIcon } from "../images/icon-plus.svg";
 import { ReactComponent as ReplyIcon } from "../images/icon-reply.svg";
 import { ReactComponent as DeleteIcon } from "../images/icon-delete.svg";
 import { ReactComponent as EditIcon } from "../images/icon-edit.svg";
+
 const CommentsLayout = ({ comment, images, updateVote, currentUser }) => {
-  const { id, content, createdAt, score, user } = comment;
+  const { id, content, createdAt, score, user, replyingTo } = comment;
   return (
     <>
       <div className="mx-auto flex w-full flex-row flex-nowrap items-start justify-between gap-5 rounded-lg bg-neutral-white p-5">
@@ -72,7 +74,7 @@ const CommentsLayout = ({ comment, images, updateVote, currentUser }) => {
           </div>
           {/* Comments */}
           <div className="w-full text-base font-normal leading-6 text-neutral-grayish-blue">
-            {content}
+            {replyingTo && <span className="text-primary-moderate-blue font-bold">@{replyingTo}</span>} {content}
           </div>
         </div>
       </div>

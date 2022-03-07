@@ -6,7 +6,7 @@ import fakeData from "../data/data.json";
 const MainPage = () => {
   const [data, setData] = useState(fakeData);
 
-  function updateVote(id, score) {
+  const updateVote = (id, score) => {
     let temp = data;
     temp.comments.forEach((comment) => {
       if (comment.id === id) {
@@ -17,7 +17,8 @@ const MainPage = () => {
       }
     });
     setData({ ...temp });
-  }
+  };
+
   const findCommentToVote = (replies, id, score) => {
     replies.forEach((reply) => {
       if (reply.id === id) {
@@ -28,6 +29,7 @@ const MainPage = () => {
       }
     });
   };
+  
   return (
     <main className="relative flex  flex-wrap place-content-center gap-6 font-mono antialiased md:w-128">
       <Comments data={data} setData={setData} updateVote={updateVote} />
