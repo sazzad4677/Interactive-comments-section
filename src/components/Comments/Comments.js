@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import CommentsLayout from "../../layout/CommentsLayout";
 
-const Comments = ({ data, setData, updateVote }) => {
+const Comments = ({ data, setData, updateVote, newReply, timeSince }) => {
   return (
     <>
       {data?.comments.map((comment, key) => (
@@ -11,9 +11,10 @@ const Comments = ({ data, setData, updateVote }) => {
               comment={comment}
               data={data}
               setData={setData}
-              currentUser={data.currentUser}
               images={comment.user.image.webp}
               updateVote={updateVote}
+              newReply={newReply}
+              timeSince={timeSince}
             />
           </div>
           {comment.replies?.length > 0 && (
@@ -24,9 +25,10 @@ const Comments = ({ data, setData, updateVote }) => {
                     data={data}
                     setData={setData}
                     comment={reply}
-                    currentUser={data.currentUser}
                     images={reply.user.image.webp}
                     updateVote={updateVote}
+                    newReply={newReply}
+                    timeSince={timeSince}
                   />
                 </Fragment>
               ))}

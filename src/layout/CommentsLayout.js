@@ -11,11 +11,13 @@ const CommentsLayout = ({
   comment,
   images,
   updateVote,
-  currentUser,
   data,
   setData,
+  newReply,
+  timeSince
 }) => {
   const { id, content, createdAt, score, user, replyingTo } = comment;
+  const { currentUser } = data;
   const [reply, setReply] = useState(false);
   const [open, setOpen] = useState(false);
   const [replyUser, setReplyUser] = useState("");
@@ -60,7 +62,9 @@ const CommentsLayout = ({
               )}
               {/* Comments Time */}
               <span className="text-base font-normal text-neutral-grayish-blue">
-                {createdAt}
+                {
+                  typeof createdAt === "number" ? `${timeSince(createdAt)} ago` : createdAt
+                }
               </span>
             </div>
             {/* Reply Button */}
@@ -104,13 +108,14 @@ const CommentsLayout = ({
         </div>
       </div>
       {reply && (
-          <Reply
-            data={data}
-            setData={setData}
-            reply={reply}
-            setReply={setReply}
-            replyUser={replyUser}
-          />
+        <Reply
+          data={data}
+          setData={setData}
+          reply={reply}
+          setReply={setReply}
+          replyUser={replyUser}
+          newReply={newReply}
+        />
       )}
       <DeleteModal open={open} setOpen={setOpen} />
     </>

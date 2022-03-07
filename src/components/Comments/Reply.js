@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import NewCommentLayout from "../../layout/NewCommentLayout";
 
-const Reply = ({ replyUser, data, setData, reply, setReply }) => {
+const Reply = ({ replyUser, newReply, data, setData, reply, setReply }) => {
+  const {
+    id,
+    user: { username },
+  } = replyUser;
   const [textAreaValue, setTextAreaValue] = useState(
-    `@${replyUser?.user?.username} `
+    `@${username} `
   );
   const onChange = (event) => setTextAreaValue(event.target.value);
   const onSubmit = (e) => {
     e.preventDefault();
+    newReply(
+      id,
+      username,
+      textAreaValue.replace(`@${username}`, "")
+    );
     setReply((prev) => !prev);
   };
   return (
