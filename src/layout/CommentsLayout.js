@@ -14,12 +14,13 @@ const CommentsLayout = ({
   data,
   setData,
   newReply,
-  timeSince
+  timeSince,
 }) => {
   const { id, content, createdAt, score, user, replyingTo } = comment;
   const { currentUser } = data;
   const [reply, setReply] = useState(false);
   const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
   const [replyUser, setReplyUser] = useState("");
   return (
     <>
@@ -62,9 +63,9 @@ const CommentsLayout = ({
               )}
               {/* Comments Time */}
               <span className="text-base font-normal text-neutral-grayish-blue">
-                {
-                  typeof createdAt === "number" ? `${timeSince(createdAt)} ago` : createdAt
-                }
+                {typeof createdAt === "number"
+                  ? `${timeSince(createdAt)} ago`
+                  : createdAt}
               </span>
             </div>
             {/* Reply Button */}
@@ -88,23 +89,42 @@ const CommentsLayout = ({
                   <DeleteIcon className="font-medium" />
                   Delete
                 </button>
-                <div className="editIcon flex cursor-pointer items-center gap-2 text-primary-moderate-blue hover:text-primary-grayish-blue">
+                <button
+                  onClick={() => setEdit((prev) => !prev)}
+                  className="editIcon flex cursor-pointer items-center gap-2 font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
+                >
                   <EditIcon className="font-medium" />
                   Edit
-                </div>
+                </button>
               </div>
             )}
           </div>
+          {edit && (
+            <div className="flex flex-grow flex-wrap gap-4">
+              <textarea
+                // onChange={onChange}
+                // ref={textareaRef}
+                style={{
+                  // minHeight: textAreaHeight,
+                  resize: "none",
+                }}
+                // value={textAreaValue}
+                placeholder="Add a comment..."
+              />
+            </div>
+          )}
           {/* Comments */}
-          <div className="w-full text-base font-normal leading-6 text-neutral-grayish-blue">
-            {replyingTo && (
-              <span className="font-bold text-primary-moderate-blue">
-                @{replyingTo}
-              </span>
-            )}
-            &nbsp;
-            {content}
-          </div>
+          {!edit && (
+            <div className="w-full text-base font-normal leading-6 text-neutral-grayish-blue">
+              {replyingTo && (
+                <span className="font-bold text-primary-moderate-blue">
+                  @{replyingTo}
+                </span>
+              )}
+              &nbsp;
+              {content}
+            </div>
+          )}
         </div>
       </div>
       {reply && (

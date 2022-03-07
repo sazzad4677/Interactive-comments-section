@@ -4,7 +4,7 @@ import CommentsLayout from "../../layout/CommentsLayout";
 const Comments = ({ data, setData, updateVote, newReply, timeSince }) => {
   return (
     <>
-      {data?.comments.map((comment, key) => (
+      {data?.comments.map((comment) => (
         <Fragment key={comment.id}>
           <div className="flex flex-col justify-center gap-6 w-full">
             <CommentsLayout

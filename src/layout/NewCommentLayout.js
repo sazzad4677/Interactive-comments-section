@@ -33,7 +33,6 @@ const NewCommentLayout = ({ data, textAreaValue, onChange, onSubmit }) => {
               resize: "none",
             }}
             value={textAreaValue}
-            className="border-1 focus:border-1 text-md w-full resize-none overflow-hidden rounded-md border-neutral-very-light-gray px-5 pb-8 font-mono text-neutral-dark-blue focus:border-neutral-grayish-blue focus:ring-0"
             placeholder="Add a comment..."
           />
         </div>
