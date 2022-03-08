@@ -12,7 +12,7 @@ const Reply = ({ replyUser, newReply, data, setData, reply, setReply }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    newReply(id, username, textAreaValue);
+    newReply(id, username, textAreaValue.replace(`@${username} `,""));
     setReply((prev) => !prev);
   };
   return (

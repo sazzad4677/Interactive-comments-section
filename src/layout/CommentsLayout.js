@@ -16,6 +16,8 @@ const CommentsLayout = ({
   setData,
   newReply,
   timeSince,
+  updateComment,
+  deleteComment,
 }) => {
   const { id, content, createdAt, score, user, replyingTo } = comment;
   const { currentUser } = data;
@@ -23,8 +25,16 @@ const CommentsLayout = ({
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const [replyUser, setReplyUser] = useState("");
-  const [textAreaHeight, textareaRef, textAreaValue, setValue] =
-    useTextArea();
+  const [textAreaHeight, textareaRef, textAreaValue, setValue] = useTextArea();
+
+  const handelFormSubmit = (e) => {
+    e.preventDefault();
+    updateComment(id, textAreaValue.replace(`@${replyingTo}`, " "));
+    setEdit(false);
+  };
+
+  const [commentToDelete, setCommentToDelete] = useState(null);
+
   return (
     <>
       <div className="mx-auto flex w-full flex-row flex-nowrap items-start justify-between gap-5 rounded-lg bg-neutral-white p-5">
@@ -86,7 +96,10 @@ const CommentsLayout = ({
               // Delete and Edit button
               <div className="flex items-center gap-6 ">
                 <button
-                  onClick={() => setOpen(true)}
+                  onClick={() => {
+                    setOpen(true);
+                    setCommentToDelete(id);
+                  }}
                   className="deleteIcon flex cursor-pointer items-center gap-2 font-medium text-primary-soft-red hover:text-primary-pale-red"
                 >
                   <DeleteIcon className="font-medium" />
@@ -106,7 +119,7 @@ const CommentsLayout = ({
             )}
           </div>
           {edit && (
-            <form className="flex flex-col -mb-2">
+            <form onSubmit={handelFormSubmit} className="-mb-2 flex flex-col">
               <textarea
                 onChange={(e) => setValue(e.target.value)}
                 ref={textareaRef}
@@ -120,7 +133,7 @@ const CommentsLayout = ({
               />
               <button
                 type="submit"
-                className="self-end text-md relative  w-28 rounded-lg border bg-primary-moderate-blue px-4 py-3 font-mono text-base font-medium text-neutral-white hover:bg-primary-grayish-blue mt-3"
+                className="text-md relative mt-3  w-28 self-end rounded-lg border bg-primary-moderate-blue px-4 py-3 font-mono text-base font-medium text-neutral-white hover:bg-primary-grayish-blue"
               >
                 UPDATE
               </button>
@@ -150,7 +163,12 @@ const CommentsLayout = ({
           newReply={newReply}
         />
       )}
-      <DeleteModal open={open} setOpen={setOpen} />
+      <DeleteModal
+        open={open}
+        setOpen={setOpen}
+        deleteComment={deleteComment}
+        commentToDelete={commentToDelete}
+      />
     </>
   );
 };

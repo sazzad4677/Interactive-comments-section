@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useRef } from "react";
 
-const Delete = ({ open, setOpen }) => {
+const Delete = ({ open, setOpen, commentToDelete, deleteComment }) => {
   const cancelButtonRef = useRef(null);
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -66,7 +66,10 @@ const Delete = ({ open, setOpen }) => {
                 <button
                   type="button"
                   className="w-full  rounded-md bg-primary-soft-red px-6 py-3 text-base font-medium tracking-wide text-neutral-white shadow-sm focus:outline-none"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    deleteComment(commentToDelete);
+                  }}
                   ref={cancelButtonRef}
                 >
                   YES, DELETE

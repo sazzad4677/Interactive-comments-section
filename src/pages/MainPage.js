@@ -25,6 +25,7 @@ const MainPage = () => {
     setData({ ...temp });
   };
 
+  // Find and vote the comments
   const findCommentToVote = (id, replies, score) => {
     replies.forEach((reply) => {
       if (reply.id === id) {
@@ -36,6 +37,7 @@ const MainPage = () => {
     });
   };
 
+  // add new comment
   const newComment = (content) => {
     let temp = data;
     temp.comments.push({
@@ -49,6 +51,7 @@ const MainPage = () => {
     setData({ ...temp });
   };
 
+  // Add new reply
   const newReply = (repliedUserId, replyingTo, content) => {
     let temp = data;
     temp.comments.forEach((comment) => {
@@ -79,6 +82,7 @@ const MainPage = () => {
     setData({ ...temp });
   };
 
+  // nested reply
   const findCommentToReply = (
     parentComment,
     replies,
@@ -105,6 +109,66 @@ const MainPage = () => {
     });
   };
 
+  // Update comment
+  const updateComment = (commentId, content) => {
+    let temp = data;
+    temp.comments.forEach((comment) => {
+      if (comment.id === commentId) {
+        comment.content = content;
+      } else {
+        if (comment?.replies?.length > 0) {
+          findCommentAndUpdate(comment.replies, commentId, content);
+        }
+      }
+    });
+    setData({ ...temp });
+  };
+
+  const findCommentAndUpdate = (replies, commentId, content) => {
+    replies.forEach((reply) => {
+      if (reply.id === commentId) {
+        reply.content = content;
+      } else {
+        if (reply?.replies?.length > 0) {
+          findCommentAndUpdate(reply, reply.replies, commentId, content);
+        }
+      }
+    });
+  };
+
+  // Delete the comment
+  const deleteComment = (id) => {
+    let temp = data;
+    temp.comments.forEach((comment) => {
+      if (comment.id === id) {
+        temp.comments = temp.comments.filter(
+          (filComment) => filComment.id !== id
+        );
+      } else {
+        if (comment?.replies?.length > 0) {
+          findCommentToDelete(comment, comment.replies, id);
+        }
+      }
+    });
+    setData({ ...temp });
+  };
+
+  const findCommentToDelete = (parentComment, replies, id) => {
+    let temp = parentComment;
+    replies.forEach((reply) => {
+      if (reply.id === id) {
+        temp.replies = temp.replies.filter(
+          (filComment) => filComment.id !== id
+        );
+      } else {
+        if (reply?.replies?.length > 0) {
+          findCommentToDelete(reply, reply.replies, id);
+        }
+      }
+    });
+  };
+
+  // Time calculation
   const timeSince = (date) => {
     const seconds = Math.floor((new Date() - date) / 1000);
 
@@ -140,6 +204,8 @@ const MainPage = () => {
         updateVote={updateVote}
         newReply={newReply}
         timeSince={timeSince}
+        updateComment={updateComment}
+        deleteComment={deleteComment}
       />
       <NewComment data={data} setData={setData} newComment={newComment} />
     </main>
