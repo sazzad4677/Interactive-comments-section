@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Comments from "../components/Comments/Comments";
 import NewComment from "../components/Comments/NewComment";
 import fakeData from "../data/data.json";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const MainPage = () => {
-  const [data, setData] = useState(fakeData);
+  const [data, setData] = useLocalStorage("comments", fakeData);
 
   // generate a unique id
   const createID = function () {

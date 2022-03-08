@@ -1,7 +1,13 @@
 import React from "react";
 
-const NewCommentLayout = ({ data, onSubmit, textAreaHeight, textareaRef, textAreaValue, setValue }) => {
-
+const NewCommentLayout = ({
+  data,
+  onSubmit,
+  textAreaHeight,
+  textareaRef,
+  textAreaValue,
+  setValue,
+}) => {
   return (
     <div className="rounded-md bg-neutral-white py-6 px-4">
       <form onSubmit={onSubmit} className="flex flex-wrap gap-5">

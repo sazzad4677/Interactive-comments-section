@@ -112,7 +112,7 @@ const CommentsLayout = ({
                   onClick={() => {
                     setEdit((prev) => !prev);
                     setValue(
-                      replyingTo ? `@${replyingTo} ${content}` :  content 
+                      replyingTo ? `@${replyingTo} ${content}` : content
                     );
                   }}
                   className="editIcon flex cursor-pointer items-center gap-2 font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"

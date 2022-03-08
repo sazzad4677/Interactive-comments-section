@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import useTextAreaWidth from "../../hooks/useTextArea";
 import NewCommentLayout from "../../layout/NewCommentLayout";
 

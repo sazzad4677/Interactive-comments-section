@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
-const useTextArea= () => {
+const useTextArea = () => {
   const [textAreaValue, setTextAreaValue] = useState("");
   // initial height for the text field
   const textAreaHeight = 32;

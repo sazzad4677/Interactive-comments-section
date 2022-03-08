@@ -8,7 +8,7 @@ const Comments = ({
   newReply,
   timeSince,
   updateComment,
-  deleteComment
+  deleteComment,
 }) => {
   return (
     <>
