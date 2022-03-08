@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import Reply from "../components/Comments/Reply";
 import useTextArea from "../hooks/useTextArea";
 import { ReactComponent as DeleteIcon } from "../images/icon-delete.svg";
@@ -29,9 +30,12 @@ const CommentsLayout = ({
 
   const handelFormSubmit = (e) => {
     e.preventDefault();
+    if (!textAreaValue.trim()) {
+      return toast.error("Please enter some text")
+    }
     updateComment(
       id,
-      replyingTo ? textAreaValue.replace(`@${replyingTo}`, " ") : textAreaValue
+      replyingTo ? textAreaValue.replace(`@${replyingTo}`, "").trim() : textAreaValue.trim()
     );
     setEdit(false);
   };

@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import useTextAreaWidth from "../../hooks/useTextArea";
 import NewCommentLayout from "../../layout/NewCommentLayout";
 
@@ -14,7 +15,11 @@ const NewComment = ({
     useTextAreaWidth();
   const onSubmit = (e) => {
     e.preventDefault();
-    newComment(textAreaValue);
+    if (!textAreaValue.trim()) {
+      return toast.error("Please enter some text")
+    }
+    newComment(textAreaValue.trim());
+    setValue("")
   };
 
   return (
