@@ -16,10 +16,15 @@ const MainPage = () => {
   const updateVote = (id, score) => {
     let temp = data;
     temp.comments.forEach((comment) => {
-      if (comment.id === id) {
-        comment.score += score;
-      }
-      if (comment?.replies?.length > 0) {
+      if (comment.id === id && score === 1 && !comment.hasUpVoted) {
+        comment.score += 1;
+        comment.hasUpVoted = true;
+        comment.hasDownVoted = false;
+      } else if (comment.id === id && score === -1 && !comment.hasDownVoted) {
+        comment.score += -1;
+        comment.hasUpVoted = false;
+        comment.hasDownVoted = true;
+      } else if (comment?.replies?.length > 0) {
         findCommentToVote(id, comment.replies, score);
       }
     });
@@ -29,11 +34,16 @@ const MainPage = () => {
   // Find and vote the comments
   const findCommentToVote = (id, replies, score) => {
     replies.forEach((reply) => {
-      if (reply.id === id) {
-        reply.score += score;
-      }
-      if (reply?.replies?.length > 0) {
-        findCommentToVote(reply, id, reply.replies, score);
+      if (reply.id === id && score === 1 && !reply.hasUpVoted) {
+        reply.score += 1;
+        reply.hasUpVoted = true;
+        reply.hasDownVoted = false;
+      } else if (reply.id === id && score === -1 && !reply.hasDownVoted) {
+        reply.score += -1;
+        reply.hasDownVoted = true;
+        reply.hasUpVoted = false;
+      } else if (reply?.replies?.length > 0) {
+        findCommentToVote(id, reply.replies, score);
       }
     });
   };
