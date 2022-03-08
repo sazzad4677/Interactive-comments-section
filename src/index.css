@@ -18,7 +18,7 @@
   --very-light-gray: 228, 33%, 97%;
 }
 textarea {
-  @apply border-2 focus:border-2 text-base w-full resize-none overflow-hidden rounded-md border-neutral-very-light-gray px-5 pb-8 font-mono text-neutral-dark-blue focus:border-primary-moderate-blue focus:ring-0
+  @apply border-2 focus:border-2 text-base w-full resize-none overflow-hidden rounded-md border-neutral-very-light-gray px-5 pb-8 font-mono text-neutral-dark-blue focus:border-primary-moderate-blue focus:ring-0 h-full
 }
 
 
