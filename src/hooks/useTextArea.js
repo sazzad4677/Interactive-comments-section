@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 const useTextArea = () => {
   const [textAreaValue, setTextAreaValue] = useState("");
   // initial height for the text field
-  const textAreaHeight = 32;
+  const textAreaHeight = 8;
   // Text area reference
   const textareaRef = useRef(null);
   // Dynamically increase the height of the text

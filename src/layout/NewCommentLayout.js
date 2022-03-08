@@ -26,7 +26,7 @@ const NewCommentLayout = ({
             onChange={(e) => setValue(e.target.value)}
             ref={textareaRef}
             style={{
-              minHeight: textAreaHeight,
+              minHeight: `${textAreaHeight}rem`,
               resize: "none",
             }}
             value={textAreaValue}
