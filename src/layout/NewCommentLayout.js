@@ -21,7 +21,7 @@ const NewCommentLayout = ({
             src={require(`../images/avatars/${data?.currentUser.image.webp}`)}
           />
         </div>
-        <div className="flex w-full flex-wrap gap-4 mobile:order-none desktop:order-none">
+        <div className="flex w-full h-32 flex-wrap gap-4 mobile:order-none desktop:order-none">
           <textarea
             onChange={(e) => setValue(e.target.value)}
             ref={textareaRef}
