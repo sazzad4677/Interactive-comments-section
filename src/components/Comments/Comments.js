@@ -16,7 +16,7 @@ const Comments = ({
         .sort((a, b) => (a.score > b.score && -1 ? a.score < b.score && 1 : 0))
         .map((comment) => (
           <Fragment key={comment.id}>
-            <div className="flex w-full flex-col justify-center gap-6">
+            <div className="flex w-full flex-col justify-center gap-6 ">
               <CommentsLayout
                 comment={comment}
                 data={data}
@@ -30,7 +30,7 @@ const Comments = ({
               />
             </div>
             {comment.replies?.length > 0 && (
-              <div className="ml-10 flex w-full flex-wrap gap-6 border-l-2 pl-10">
+              <div className="flex w-full flex-wrap gap-6 border-l-2 mobile:ml-0 mobile:pl-4 desktop:ml-10 desktop:pl-10">
                 {comment.replies
                   .sort((a, b) =>
                     a.score > b.score && -1 ? a.score < b.score && 1 : 0

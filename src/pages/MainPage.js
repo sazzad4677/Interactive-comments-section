@@ -192,9 +192,9 @@ const MainPage = () => {
     }
     interval = seconds / 60;
     if (interval > 1) {
-      return Math.floor(interval) + " minutes";
+      return Math.floor(interval) + " min";
     }
-    return Math.floor(seconds) + " seconds";
+    return Math.floor(seconds) + " sec";
   };
 
   return (

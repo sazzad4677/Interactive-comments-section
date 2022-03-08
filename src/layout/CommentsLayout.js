@@ -35,14 +35,54 @@ const CommentsLayout = ({
     );
     setEdit(false);
   };
-
   const [commentToDelete, setCommentToDelete] = useState(null);
+  const ReplyEditDeleteButton = () => {
+    return (
+      <>
+        {currentUser.username !== user.username ? (
+          <button
+            onClick={() => {
+              setReply((prev) => !prev);
+              setReplyUser(comment);
+            }}
+            className="replyIcon flex items-center font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
+          >
+            <ReplyIcon className="font-medium" /> &nbsp; Reply
+          </button>
+        ) : (
+          // Delete and Edit button
+          <div className="flex items-center gap-6 ">
+            <button
+              onClick={() => {
+                setOpen(true);
+                setCommentToDelete(id);
+              }}
+              className="deleteIcon flex cursor-pointer items-center gap-2 font-medium text-primary-soft-red hover:text-primary-pale-red"
+            >
+              <DeleteIcon className="font-medium" />
+              Delete
+            </button>
+            <button
+              onClick={() => {
+                setEdit((prev) => !prev);
+                setValue(replyingTo ? `@${replyingTo} ${content}` : content);
+              }}
+              className="editIcon flex cursor-pointer items-center gap-2 font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
+            >
+              <EditIcon className="font-medium" />
+              Edit
+            </button>
+          </div>
+        )}
+      </>
+    );
+  };
 
   return (
     <>
-      <div className="mx-auto flex w-full flex-row flex-nowrap items-start justify-between gap-5 rounded-lg bg-neutral-white p-5">
+      <div className="mx-auto flex w-full items-start justify-between gap-5 rounded-lg bg-neutral-white p-5 mobile:flex-row mobile:flex-wrap desktop:flex-nowrap">
         {/* voting button */}
-        <div className="max-w-10 flex h-24 max-h-24 w-11 flex-col items-stretch justify-around rounded-lg bg-neutral-very-light-gray py-2 text-neutral-grayish-blue">
+        <div className="max-w-10 flex max-h-24 items-center justify-around rounded-lg bg-neutral-very-light-gray py-2 text-neutral-grayish-blue mobile:order-2 mobile:h-10 mobile:w-24 mobile:flex-row desktop:order-1 desktop:h-24 desktop:w-11 desktop:flex-col">
           {/* Plus button */}
           <button
             onClick={() => updateVote(id, 1)}
@@ -61,7 +101,8 @@ const CommentsLayout = ({
             <MinusIcon className="scoreUpDownButton font-medium" />
           </button>
         </div>
-        <div className="flex w-full flex-col gap-4 text-base font-medium text-neutral-dark-blue">
+        {/* Comments */}
+        <div className="flex w-full flex-col flex-wrap gap-4 text-base font-medium text-neutral-dark-blue desktop:order-2">
           <div className="flex justify-between gap-4">
             {/* Profile */}
             <div className="flex items-center gap-4 ">
@@ -84,44 +125,10 @@ const CommentsLayout = ({
                   : createdAt}
               </span>
             </div>
-            {/* Reply Button */}
-            {currentUser.username !== user.username ? (
-              <button
-                onClick={() => {
-                  setReply((prev) => !prev);
-                  setReplyUser(comment);
-                }}
-                className="replyIcon flex items-center font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
-              >
-                <ReplyIcon className="font-medium" /> &nbsp; Reply
-              </button>
-            ) : (
-              // Delete and Edit button
-              <div className="flex items-center gap-6 ">
-                <button
-                  onClick={() => {
-                    setOpen(true);
-                    setCommentToDelete(id);
-                  }}
-                  className="deleteIcon flex cursor-pointer items-center gap-2 font-medium text-primary-soft-red hover:text-primary-pale-red"
-                >
-                  <DeleteIcon className="font-medium" />
-                  Delete
-                </button>
-                <button
-                  onClick={() => {
-                    setEdit((prev) => !prev);
-                    setValue(
-                      replyingTo ? `@${replyingTo} ${content}` : content
-                    );
-                  }}
-                  className="editIcon flex cursor-pointer items-center gap-2 font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
-                >
-                  <EditIcon className="font-medium" />
-                  Edit
-                </button>
-              </div>
-            )}
+            {/* Reply edit and delete Button for desktop only*/}
+            <div className="mobile:hidden desktop:flex">
+              <ReplyEditDeleteButton />
+            </div>
           </div>
           {edit && (
             <form onSubmit={handelFormSubmit} className="-mb-2 flex flex-col">
@@ -156,6 +163,10 @@ const CommentsLayout = ({
               {content}
             </div>
           )}
+        </div>
+        {/* Reply Edit and Delete button for mobile only */}
+        <div className="ml-auto mobile:order-3 desktop:hidden">
+          <ReplyEditDeleteButton />
         </div>
       </div>
       {reply && (
