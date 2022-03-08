@@ -1,8 +1,7 @@
 import React from "react";
-import useTextAreaWidth from "../hooks/useTextAreaWidth";
 
-const NewCommentLayout = ({ data, onSubmit }) => {
-  const [textAreaHeight, textareaRef, textAreaValue, setValue] = useTextAreaWidth()
+const NewCommentLayout = ({ data, onSubmit, textAreaHeight, textareaRef, textAreaValue, setValue }) => {
+
   return (
     <div className="rounded-md bg-neutral-white py-6 px-4">
       <form onSubmit={onSubmit} className="flex flex-wrap gap-5">
@@ -15,7 +14,7 @@ const NewCommentLayout = ({ data, onSubmit }) => {
         </div>
         <div className="flex flex-grow flex-wrap gap-4">
           <textarea
-            onChange={(e) => setValue(e)}
+            onChange={(e) => setValue(e.target.value)}
             ref={textareaRef}
             style={{
               minHeight: textAreaHeight,
@@ -30,7 +29,7 @@ const NewCommentLayout = ({ data, onSubmit }) => {
             type="submit"
             className="text-md relative h-fit w-28 rounded-lg border bg-primary-moderate-blue px-4 py-3 font-mono text-base font-medium text-neutral-white hover:bg-primary-grayish-blue"
           >
-            REPLY
+            SEND
           </button>
         </div>
       </form>

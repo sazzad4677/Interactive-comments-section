@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 
-const useTextAreaWidth = () => {
+const useTextArea= () => {
   const [textAreaValue, setTextAreaValue] = useState("");
   // initial height for the text field
   const textAreaHeight = 32;
@@ -18,9 +18,9 @@ const useTextAreaWidth = () => {
   }, [textAreaValue, textareaRef]);
 
   function setValue(event) {
-    setTextAreaValue(event.target.value);
+    setTextAreaValue(event);
   }
   return [textAreaHeight, textareaRef, textAreaValue, setValue];
 };
 
-export default useTextAreaWidth;
+export default useTextArea;

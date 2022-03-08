@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useTextAreaWidth from "../../hooks/useTextArea";
 import NewCommentLayout from "../../layout/NewCommentLayout";
 
 const NewComment = ({
@@ -9,8 +10,8 @@ const NewComment = ({
   replyUser,
   newComment,
 }) => {
-  const [textAreaValue, setTextAreaValue] = useState("");
-  const onChange = (event) => setTextAreaValue(event.target.value);
+  const [textAreaHeight, textareaRef, textAreaValue, setValue] =
+    useTextAreaWidth();
   const onSubmit = (e) => {
     e.preventDefault();
     newComment(textAreaValue);
@@ -25,10 +26,11 @@ const NewComment = ({
         setReply={setReply}
         replyUser={replyUser}
         newComment={newComment}
-        onChange={onChange}
         onSubmit={onSubmit}
         textAreaValue={textAreaValue}
-        setTextAreaValue={setTextAreaValue}
+        textAreaHeight={textAreaHeight}
+        textareaRef={textareaRef}
+        setValue={setValue}
       />
     </div>
   );

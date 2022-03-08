@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Reply from "../components/Comments/Reply";
-import useTextAreaWidth from "../hooks/useTextAreaWidth";
+import useTextArea from "../hooks/useTextArea";
 import { ReactComponent as DeleteIcon } from "../images/icon-delete.svg";
 import { ReactComponent as EditIcon } from "../images/icon-edit.svg";
 import { ReactComponent as MinusIcon } from "../images/icon-minus.svg";
@@ -24,7 +24,7 @@ const CommentsLayout = ({
   const [edit, setEdit] = useState(false);
   const [replyUser, setReplyUser] = useState("");
   const [textAreaHeight, textareaRef, textAreaValue, setValue] =
-    useTextAreaWidth();
+    useTextArea();
   return (
     <>
       <div className="mx-auto flex w-full flex-row flex-nowrap items-start justify-between gap-5 rounded-lg bg-neutral-white p-5">
@@ -78,7 +78,7 @@ const CommentsLayout = ({
                   setReply((prev) => !prev);
                   setReplyUser(comment);
                 }}
-                className="replyIcon gap- flex items-center font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
+                className="replyIcon flex items-center font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
               >
                 <ReplyIcon className="font-medium" /> &nbsp; Reply
               </button>
@@ -93,7 +93,10 @@ const CommentsLayout = ({
                   Delete
                 </button>
                 <button
-                  onClick={() => setEdit((prev) => !prev)}
+                  onClick={() => {
+                    setEdit((prev) => !prev);
+                    setValue(`@${replyingTo} ${content}`);
+                  }}
                   className="editIcon flex cursor-pointer items-center gap-2 font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
                 >
                   <EditIcon className="font-medium" />
@@ -103,9 +106,9 @@ const CommentsLayout = ({
             )}
           </div>
           {edit && (
-            <div className="flex flex-grow flex-wrap gap-4">
+            <form className="flex flex-col -mb-2">
               <textarea
-                onChange={(e) => setValue(e)}
+                onChange={(e) => setValue(e.target.value)}
                 ref={textareaRef}
                 style={{
                   minHeight: textAreaHeight,
@@ -113,8 +116,15 @@ const CommentsLayout = ({
                 }}
                 value={textAreaValue}
                 placeholder="Add a comment..."
+                className="self-start"
               />
-            </div>
+              <button
+                type="submit"
+                className="self-end text-md relative  w-28 rounded-lg border bg-primary-moderate-blue px-4 py-3 font-mono text-base font-medium text-neutral-white hover:bg-primary-grayish-blue mt-3"
+              >
+                UPDATE
+              </button>
+            </form>
           )}
           {/* Comments */}
           {!edit && (
