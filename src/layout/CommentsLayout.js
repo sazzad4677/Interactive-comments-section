@@ -46,6 +46,7 @@ const CommentsLayout = ({
               setReplyUser(comment);
             }}
             className="replyIcon flex items-center font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
+            title="reply"
           >
             <ReplyIcon className="font-medium" /> &nbsp; Reply
           </button>
@@ -58,6 +59,7 @@ const CommentsLayout = ({
                 setCommentToDelete(id);
               }}
               className="deleteIcon flex cursor-pointer items-center gap-2 font-medium text-primary-soft-red hover:text-primary-pale-red"
+              title="delete"
             >
               <DeleteIcon className="font-medium" />
               Delete
@@ -68,6 +70,7 @@ const CommentsLayout = ({
                 setValue(replyingTo ? `@${replyingTo} ${content}` : content);
               }}
               className="editIcon flex cursor-pointer items-center gap-2 font-medium text-primary-moderate-blue hover:text-primary-grayish-blue"
+              title="edit"
             >
               <EditIcon className="font-medium" />
               Edit
@@ -87,6 +90,7 @@ const CommentsLayout = ({
           <button
             onClick={() => updateVote(id, 1)}
             className="flex items-center justify-center rounded bg-neutral-very-light-gray font-medium"
+            title="upvote"
           >
             <PlusIcon className="scoreUpDownButton font-medium" />
           </button>
@@ -97,6 +101,7 @@ const CommentsLayout = ({
           <button
             onClick={() => updateVote(id, -1)}
             className="flex items-center justify-center rounded bg-neutral-very-light-gray font-medium"
+            title="downvote"
           >
             <MinusIcon className="scoreUpDownButton font-medium" />
           </button>
@@ -146,6 +151,7 @@ const CommentsLayout = ({
               <button
                 type="submit"
                 className="text-md relative mt-3  w-28 self-end rounded-lg border bg-primary-moderate-blue px-4 py-3 font-mono text-base font-medium text-neutral-white hover:bg-primary-grayish-blue"
+                title="update"
               >
                 UPDATE
               </button>

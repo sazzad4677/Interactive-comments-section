@@ -62,12 +62,14 @@ const Delete = ({ open, setOpen, commentToDelete, deleteComment }) => {
                   type="button"
                   className="w-full rounded-md border border-transparent bg-neutral-grayish-blue px-6 py-3 text-base font-medium tracking-tight text-neutral-white "
                   onClick={() => setOpen(false)}
+                  title="cancel delete"
                 >
                   NO, CANCEL
                 </button>
                 <button
                   type="button"
                   className="w-full  rounded-md bg-primary-soft-red px-6 py-3 text-base font-medium tracking-wide text-neutral-white shadow-sm focus:outline-none"
+                  title="confirm delete"
                   onClick={() => {
                     setOpen(false);
                     deleteComment(commentToDelete);
