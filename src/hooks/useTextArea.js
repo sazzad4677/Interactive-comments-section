@@ -20,7 +20,12 @@ const useTextArea = () => {
   function setValue(event) {
     setTextAreaValue(event);
   }
-  return [textAreaHeight, textareaRef, textAreaValue, setValue];
+  return [
+    textAreaHeight,
+    textareaRef,
+    textAreaValue,
+    setValue,
+  ];
 };
 
 export default useTextArea;

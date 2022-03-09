@@ -31,11 +31,13 @@ const CommentsLayout = ({
   const handelFormSubmit = (e) => {
     e.preventDefault();
     if (!textAreaValue.trim()) {
-      return toast.error("Please enter some text")
+      return toast.error("Please enter some text");
     }
     updateComment(
       id,
-      replyingTo ? textAreaValue.replace(`@${replyingTo}`, "").trim() : textAreaValue.trim()
+      replyingTo
+        ? textAreaValue.replace(`@${replyingTo}`, "").trim()
+        : textAreaValue.trim()
     );
     setEdit(false);
   };
@@ -92,7 +94,11 @@ const CommentsLayout = ({
         <div className="max-w-10 flex max-h-24 items-center justify-around rounded-lg bg-neutral-very-light-gray py-2 text-neutral-grayish-blue mobile:order-2 mobile:h-10 mobile:w-24 mobile:flex-row desktop:order-1 desktop:h-24 desktop:w-11 desktop:flex-col">
           {/* Plus button */}
           <button
-            onClick={() => updateVote(id, 1)}
+            onClick={() => {
+              updateVote(id, 1);
+              currentUser.hasUpVoted = true;
+              currentUser.hasDownVoted = false;
+            }}
             className="flex items-center justify-center rounded bg-neutral-very-light-gray font-medium"
             title="upvote"
           >
@@ -103,7 +109,11 @@ const CommentsLayout = ({
           </p>
           {/* Minus button */}
           <button
-            onClick={() => updateVote(id, -1)}
+            onClick={() => {
+              updateVote(id, -1);
+              currentUser.hasDownVoted = true;
+              currentUser.hasUpVoted = false;
+            }}
             className="flex items-center justify-center rounded bg-neutral-very-light-gray font-medium"
             title="downvote"
           >

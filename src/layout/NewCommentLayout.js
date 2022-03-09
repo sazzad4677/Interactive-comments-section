@@ -7,6 +7,9 @@ const NewCommentLayout = ({
   textareaRef,
   textAreaValue,
   setValue,
+  error,
+  setError,
+  reply,
 }) => {
   return (
     <div className="rounded-md bg-neutral-white py-6 px-4">
@@ -21,9 +24,12 @@ const NewCommentLayout = ({
             src={require(`../images/avatars/${data?.currentUser.image.webp}`)}
           />
         </div>
-        <div className="flex w-full h-32 flex-wrap gap-4 mobile:order-none desktop:order-none">
+        <div className="flex w-full flex-wrap gap-4 mobile:order-none desktop:order-none">
           <textarea
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => {
+              setValue(e.target.value)
+              setError(false)
+            }}
             ref={textareaRef}
             style={{
               minHeight: `${textAreaHeight}rem`,
@@ -31,6 +37,7 @@ const NewCommentLayout = ({
             }}
             value={textAreaValue}
             placeholder="Add a comment..."
+            className={error ? `border-primary-soft-red` : ""}
           />
         </div>
         <div className="ml-auto mobile:order-2 desktop:order-none">
@@ -39,7 +46,7 @@ const NewCommentLayout = ({
             className="text-md relative h-fit w-28 rounded-lg border bg-primary-moderate-blue px-4 py-3 font-mono text-base font-medium text-neutral-white hover:bg-primary-grayish-blue"
             title="add comments"
           >
-            SEND
+            {reply ? "REPLY" : "SEND"}
           </button>
         </div>
       </form>

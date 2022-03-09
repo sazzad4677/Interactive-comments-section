@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-import useTextAreaWidth from "../../hooks/useTextArea";
+import useTextArea from "../../hooks/useTextArea";
 import NewCommentLayout from "../../layout/NewCommentLayout";
 
 const NewComment = ({
@@ -12,14 +12,17 @@ const NewComment = ({
   newComment,
 }) => {
   const [textAreaHeight, textareaRef, textAreaValue, setValue] =
-    useTextAreaWidth();
+    useTextArea();
+  const [error, setError] = useState(false);
   const onSubmit = (e) => {
     e.preventDefault();
     if (!textAreaValue.trim()) {
-      return toast.error("Please enter some text")
+      setError(true);
+      return toast.error("Please enter some text");
     }
+    setError(false);
     newComment(textAreaValue.trim());
-    setValue("")
+    setValue("");
   };
 
   return (
@@ -36,6 +39,8 @@ const NewComment = ({
         textAreaHeight={textAreaHeight}
         textareaRef={textareaRef}
         setValue={setValue}
+        error={error}
+        setError={setError}
       />
     </div>
   );

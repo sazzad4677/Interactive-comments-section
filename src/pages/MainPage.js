@@ -15,15 +15,12 @@ const MainPage = () => {
   // Vote the comments
   const updateVote = (id, score) => {
     let temp = data;
+    const {currentUser} = temp;
     temp.comments.forEach((comment) => {
-      if (comment.id === id && score === 1 && !comment.hasUpVoted) {
+      if (comment.id === id && score === 1 && !currentUser.hasUpVoted) {
         comment.score += 1;
-        comment.hasUpVoted = true;
-        comment.hasDownVoted = false;
-      } else if (comment.id === id && score === -1 && !comment.hasDownVoted) {
+      } else if (comment.id === id && score === -1 && !currentUser.hasDownVoted) {
         comment.score += -1;
-        comment.hasUpVoted = false;
-        comment.hasDownVoted = true;
       } else if (comment?.replies?.length > 0) {
         findCommentToVote(id, comment.replies, score);
       }
@@ -33,15 +30,13 @@ const MainPage = () => {
 
   // Find and vote the comments
   const findCommentToVote = (id, replies, score) => {
+    let temp = data;
+    const {currentUser} = temp;
     replies.forEach((reply) => {
-      if (reply.id === id && score === 1 && !reply.hasUpVoted) {
+      if (reply.id === id && score === 1 && !currentUser.hasUpVoted) {
         reply.score += 1;
-        reply.hasUpVoted = true;
-        reply.hasDownVoted = false;
-      } else if (reply.id === id && score === -1 && !reply.hasDownVoted) {
+      } else if (reply.id === id && score === -1 && !currentUser.hasDownVoted) {
         reply.score += -1;
-        reply.hasDownVoted = true;
-        reply.hasUpVoted = false;
       } else if (reply?.replies?.length > 0) {
         findCommentToVote(id, reply.replies, score);
       }
