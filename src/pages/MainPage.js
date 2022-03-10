@@ -1,5 +1,6 @@
 import React from "react";
 import Comments from "../components/Comments/Comments";
+import Footer from "../components/Comments/Footer";
 import NewComment from "../components/Comments/NewComment";
 import fakeData from "../data/data.json";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -15,11 +16,15 @@ const MainPage = () => {
   // Vote the comments
   const updateVote = (id, score) => {
     let temp = data;
-    const {currentUser} = temp;
+    const { currentUser } = temp;
     temp.comments.forEach((comment) => {
       if (comment.id === id && score === 1 && !currentUser.hasUpVoted) {
         comment.score += 1;
-      } else if (comment.id === id && score === -1 && !currentUser.hasDownVoted) {
+      } else if (
+        comment.id === id &&
+        score === -1 &&
+        !currentUser.hasDownVoted
+      ) {
         comment.score += -1;
       } else if (comment?.replies?.length > 0) {
         findCommentToVote(id, comment.replies, score);
@@ -31,7 +36,7 @@ const MainPage = () => {
   // Find and vote the comments
   const findCommentToVote = (id, replies, score) => {
     let temp = data;
-    const {currentUser} = temp;
+    const { currentUser } = temp;
     replies.forEach((reply) => {
       if (reply.id === id && score === 1 && !currentUser.hasUpVoted) {
         reply.score += 1;
@@ -203,18 +208,21 @@ const MainPage = () => {
   };
 
   return (
-    <main className="relative flex flex-wrap place-content-center gap-6 font-mono antialiased md:w-128">
-      <Comments
-        data={data}
-        setData={setData}
-        updateVote={updateVote}
-        newReply={newReply}
-        timeSince={timeSince}
-        updateComment={updateComment}
-        deleteComment={deleteComment}
-      />
-      <NewComment data={data} setData={setData} newComment={newComment} />
-    </main>
+    <div>
+      <main className="relative flex flex-wrap place-content-center gap-6 font-mono antialiased md:w-128">
+        <Comments
+          data={data}
+          setData={setData}
+          updateVote={updateVote}
+          newReply={newReply}
+          timeSince={timeSince}
+          updateComment={updateComment}
+          deleteComment={deleteComment}
+        />
+        <NewComment data={data} setData={setData} newComment={newComment} />
+      </main>
+      <Footer />
+    </div>
   );
 };
 
