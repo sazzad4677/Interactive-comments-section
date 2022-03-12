@@ -30,7 +30,7 @@ const Comments = ({
               />
             </div>
             {comment.replies?.length > 0 && (
-              <div className="flex w-full flex-wrap gap-6 border-l-2 mobile:ml-0 mobile:pl-4 desktop:ml-10 desktop:pl-10">
+              <div className="flex w-full flex-wrap gap-6 border-l-2 ml-0 pl-4 md:ml-10 md:pl-10">
                 {comment.replies
                   .sort((a, b) =>
                     a.score > b.score && -1 ? a.score < b.score && 1 : 0

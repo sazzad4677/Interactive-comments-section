@@ -89,9 +89,9 @@ const CommentsLayout = ({
 
   return (
     <>
-      <div className="mx-auto flex w-full items-start justify-between gap-5 rounded-lg bg-neutral-white p-5 mobile:flex-row mobile:flex-wrap desktop:flex-nowrap">
+      <div className="mx-auto flex w-full items-start justify-between gap-5 rounded-lg bg-neutral-white p-5 flex-row flex-wrap md:flex-nowrap">
         {/* voting button */}
-        <div className="max-w-10 flex max-h-24 items-center justify-around rounded-lg bg-neutral-very-light-gray py-2 text-neutral-grayish-blue mobile:order-2 mobile:h-10 mobile:w-24 mobile:flex-row desktop:order-1 desktop:h-24 desktop:w-11 desktop:flex-col">
+        <div className="max-w-10 flex max-h-24 items-center justify-around rounded-lg bg-neutral-very-light-gray py-2 text-neutral-grayish-blue order-2 h-10 w-24 flex-row md:order-1 md:h-24 md:w-11 md:flex-col">
           {/* Plus button */}
           <button
             onClick={() => {
@@ -121,7 +121,7 @@ const CommentsLayout = ({
           </button>
         </div>
         {/* Comments */}
-        <div className="flex w-full flex-col flex-wrap gap-4 text-base font-medium text-neutral-dark-blue desktop:order-2">
+        <div className="flex w-full flex-col flex-wrap gap-4 text-base font-medium text-neutral-dark-blue md:order-2">
           <div className="flex justify-between gap-4">
             {/* Profile */}
             <div className="flex items-center gap-4 ">
@@ -145,7 +145,7 @@ const CommentsLayout = ({
               </span>
             </div>
             {/* Reply edit and delete Button for desktop only*/}
-            <div className="mobile:hidden desktop:flex">
+            <div className="hidden md:block">
               <ReplyEditDeleteButton />
             </div>
           </div>
@@ -185,7 +185,7 @@ const CommentsLayout = ({
           )}
         </div>
         {/* Reply Edit and Delete button for mobile only */}
-        <div className="ml-auto mobile:order-3 desktop:hidden">
+        <div className="ml-auto order-3 md:hidden">
           <ReplyEditDeleteButton />
         </div>
       </div>

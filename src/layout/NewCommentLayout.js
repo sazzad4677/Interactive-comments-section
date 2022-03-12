@@ -15,16 +15,16 @@ const NewCommentLayout = ({
     <div className="rounded-md bg-neutral-white py-6 px-4">
       <form
         onSubmit={onSubmit}
-        className="flex gap-5 mobile:flex-wrap desktop:flex-nowrap"
+        className="flex gap-5 flex-wrap md:flex-nowrap"
       >
-        <div className="mobile:order-1 desktop:order-none ">
+        <div className="order-1 md:order-none ">
           <img
-            className="ml-0.5 mobile:w-10 desktop:w-fit"
+            className="ml-0.5 w-10 md:w-fit"
             alt={data?.currentUser.username}
             src={require(`../images/avatars/${data?.currentUser.image.webp}`)}
           />
         </div>
-        <div className="flex w-full flex-wrap gap-4 mobile:order-none desktop:order-none">
+        <div className="flex w-full flex-wrap gap-4 order-none">
           <textarea
             onChange={(e) => {
               setValue(e.target.value)
@@ -40,7 +40,7 @@ const NewCommentLayout = ({
             className={error ? `border-primary-soft-red` : ""}
           />
         </div>
-        <div className="ml-auto mobile:order-2 desktop:order-none">
+        <div className="ml-auto order-2 md:order-none">
           <button
             type="submit"
             className="text-md relative h-fit w-28 rounded-lg border bg-primary-moderate-blue px-4 py-3 font-mono text-base font-medium text-neutral-white hover:bg-primary-grayish-blue"

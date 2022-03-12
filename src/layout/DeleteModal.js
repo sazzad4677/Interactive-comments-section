@@ -39,7 +39,7 @@ const Delete = ({ open, setOpen, commentToDelete, deleteComment }) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="relative inline-flex transform flex-col justify-center  gap-5 overflow-hidden rounded-lg bg-neutral-white px-2 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:pb-4 sm:align-middle mobile:px-6">
+            <div className="relative inline-flex transform flex-col justify-center  gap-5 overflow-hidden rounded-lg bg-neutral-white px-6 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:pb-4 sm:align-middle ">
               <div className="bg-neutral-white ">
                 <div className="sm:flex sm:items-start">
                   {/* mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left" */}
